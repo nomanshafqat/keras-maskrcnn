@@ -125,6 +125,7 @@ class Generator(object):
 
             # randomly transform the masks and expand so to have a fake channel dimension
             for m in range(len(masks)):
+                mask[m] =np.expand_dims(mask[m], axis=-1)
                 masks[m] = apply_transform(transform, masks[m], self.transform_parameters)
                 masks[m] = np.expand_dims(masks[m], axis=2)
 
