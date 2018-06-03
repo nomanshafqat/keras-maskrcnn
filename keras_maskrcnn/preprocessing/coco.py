@@ -32,7 +32,7 @@ class CocoGenerator(Generator):
             **kwargs):
         self.data_dir  = data_dir
         self.set_name  = set_name
-        self.coco      = COCO(os.path.join(data_dir, 'annotations', 'instances_' + set_name + '.json'))
+        self.coco      = COCO(os.path.join(data_dir, 'annotation.json'))
         self.image_ids = self.coco.getImgIds()
 
         self.load_classes()
@@ -84,7 +84,7 @@ class CocoGenerator(Generator):
 
     def load_image(self, image_index):
         image_info = self.coco.loadImgs(self.image_ids[image_index])[0]
-        path       = os.path.join(self.data_dir, 'images', self.set_name, image_info['file_name'])
+        path       = os.path.join(self.data_dir, 'images', image_info['file_name'])
         return read_image_bgr(path)
 
     def load_annotations(self, image_index):
