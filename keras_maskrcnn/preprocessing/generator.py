@@ -40,8 +40,8 @@ class Generator(object):
         batch_size=1,
         group_method='ratio',  # one of 'none', 'random', 'ratio'
         shuffle_groups=True,
-        image_min_side=800,
-        image_max_side=1333,
+        image_min_side=300,
+        image_max_side=300,
         transform_parameters=None,
         compute_anchor_targets=anchor_targets_bbox,
     ):
@@ -121,6 +121,7 @@ class Generator(object):
         # randomly transform both image and annotations
         if self.transform_generator:
             transform = adjust_transform_for_image(next(self.transform_generator), image, self.transform_parameters.relative_translation)
+            print(transform)
             image     = apply_transform(transform, image, self.transform_parameters)
 
             # randomly transform the masks and expand so to have a fake channel dimension
